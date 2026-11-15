@@ -2,7 +2,6 @@
 // API SERVICE — Spring Boot backend (localhost:8080) with Turso / offline fallbacks.
 // ============================================================================
 import * as turso from './turso';
-import { FALLBACK_PLACEMENT_QUESTIONS } from '../data/placementQuestions';
 
 export const isLocalEnv =
   (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') &&
@@ -82,67 +81,6 @@ export async function authenticate({ mode, username, password, displayName, isVi
     user: { user_id: 'local_' + Date.now(), username, display_name: displayName },
     source: 'offline'
   };
-}
-
-// ----------------------------------------------------------------- placement test
-export async function fetchPlacementQuestions() {
-  if (isLocalEnv) {
-    try {
-      const res = await fetch(`${API_BASE_URL}/api/placement/questions`);
-      if (res.ok) {
-        const data = await res.json();
-        if (data.questions?.length) return data.questions;
-      }
-    } catch {
-      /* fall through */
-    }
-  }
-  return FALLBACK_PLACEMENT_QUESTIONS;
-}
-
-const LEVELS = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
-
-function computeLocalResult(questions, answers) {
-  const counts = Object.fromEntries(LEVELS.map((l) => [l, { correct: 0, total: 0 }]));
-  let totalCorrect = 0;
-  questions.forEach((q) => {
-    const lvl = q.level || 'A1';
-    if (!counts[lvl]) counts[lvl] = { correct: 0, total: 0 };
-    counts[lvl].total++;
-    const correctIdx = q.correct_index !== undefined ? q.correct_index : 1;
-    if (answers[q.id] === correctIdx) {
-      counts[lvl].correct++;
-      totalCorrect++;
-    }
-  });
-  let rec = 'A1';
-  const levelScores = LEVELS.map((lvl) => {
-    const c = counts[lvl].correct;
-    const pct = Math.round((c / Math.max(1, counts[lvl].total)) * 100);
-    if (pct >= 60) rec = lvl;
-    return { level: lvl, correct: c, total: counts[lvl].total, percentage: pct };
-  });
-  return { recommended_level: rec, level_scores: levelScores, total_correct: totalCorrect, total_questions: questions.length };
-}
-
-export async function submitPlacement({ questions, answers, token }) {
-  if (isLocalEnv) {
-    try {
-      const headers = { 'Content-Type': 'application/json' };
-      if (token) headers.Authorization = `Bearer ${token}`;
-      const res = await fetch(`${API_BASE_URL}/api/placement/submit`, {
-        method: 'POST',
-        headers,
-        body: JSON.stringify({
-          answers: Object.entries(answers).map(([question_id, selected_index]) => ({ question_id, selected_index }))
-        })
-      });
-      if (res.ok) return await res.json();
-    } catch {
-      /* fall through */
-    }
-  }
-  return computeLocalResult(questions, answers);
 }
 
 // ----------------------------------------------------------------- lessons
