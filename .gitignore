@@ -16,3 +16,18 @@ dist/
 target/
 .venv/
 __pycache__/
+
+# AI coding-tool folders (local only)
+.claude/
+.agent/
+.agents/
+.gemini/
+.codex/
+.impeccable/
+**/.claude/
+**/.agent/
+**/.agents/
+**/.gemini/
+**/.codex/
+**/.impeccable/
+*.exe
