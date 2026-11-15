@@ -1,0 +1,3 @@
+/* App-level tweaks that belong to no single page. Page/feature styles live in assets/styles/. */
+#root { min-height: 100vh; display: flex; flex-direction: column; }
+#root > main { flex: 1; }

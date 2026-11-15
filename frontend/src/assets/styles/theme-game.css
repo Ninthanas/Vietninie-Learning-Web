@@ -1,0 +1,226 @@
+/* ============================================================================
+   VIETNINIE GAME THEME  (loaded last: overrides tokens + base components)
+   Playful "clay" look: warm cream ground, mascot red, thick outlines,
+   hard bottom shadows that make buttons feel pressable.
+   ============================================================================ */
+:root {
+  /* Red + white brand palette (from the logo) */
+  --bg-primary: #FFF9F8;
+  --bg-secondary: #FFFFFF;
+  --bg-tertiary: #FFEFED;
+  --bg-glass: rgba(255, 249, 248, 0.92);
+  --text-primary: #2A1514;
+  --text-secondary: #5A3F3C;
+  --text-muted: #7A5E5A;
+  --border-color: #F0D5D2;
+  --border-strong: #DDB5B0;
+
+  --brand-primary: #C41E17;        /* red used for text, icons, outlines (>= 4.5:1 on white and on pink) */
+  --brand-primary-hover: #A8150F;
+  --brand-primary-soft: #FFE3E0;
+  --btn-bg: #D7261E;               /* red used as a button fill (white text on top) */
+  --btn-bg-hover: #B91C16;
+  --brand-secondary: #047857;
+  --brand-secondary-soft: #D7F3E6;
+  --brand-gold: #92400E;
+  --brand-gold-soft: #FFEFC2;
+  --brand-indigo: #4F46E5;
+  --brand-indigo-soft: #E6E8FB;
+
+  --game-ink: #2A1514;            /* outline + hard shadow colour */
+  --game-gold: #FFC83D;           /* only for XP / rewards */
+  --game-gold-deep: #E39A00;
+  --font-display: 'Baloo 2', 'Plus Jakarta Sans', 'Noto Sans SC', sans-serif;
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 26px;
+}
+
+[data-theme="dark"] {
+  /* Dark: deep wine ground, lighter coral red for text, stronger red buttons, lighter outlines */
+  --bg-primary: #150B0B;
+  --bg-secondary: #231414;
+  --bg-tertiary: #301B1B;
+  --bg-glass: rgba(21, 11, 11, 0.92);
+  --text-primary: #FFF1EF;
+  --text-secondary: #EBCFCB;
+  --text-muted: #C9A8A3;
+  --border-color: #432626;
+  --border-strong: #6A4040;
+  --brand-primary: #FF7B72;
+  --brand-primary-hover: #FF958D;
+  --brand-primary-soft: rgba(255, 123, 114, 0.18);
+  --btn-bg: #C62B25;
+  --btn-bg-hover: #D9433C;
+  --brand-secondary: #4ADE9B;
+  --brand-secondary-soft: rgba(74, 222, 155, 0.16);
+  --brand-gold: #FBBF24;
+  --brand-gold-soft: rgba(251, 191, 36, 0.16);
+  --brand-indigo: #A5B4FC;
+  --brand-indigo-soft: rgba(165, 180, 252, 0.18);
+  --game-ink: #8A5450;            /* light outline so cards stay readable on dark */
+}
+
+h1, h2, h3, .hero-title, .brand-logo-name { font-family: var(--font-display); letter-spacing: -0.01em; }
+h1, h2 { font-weight: 800; }
+h3 { font-weight: 700; }
+
+/* ---------------------------------------------------------------- Buttons */
+.btn {
+  min-height: 44px;
+  padding: 10px 22px;
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--game-ink);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+  box-shadow: 0 4px 0 var(--game-ink);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 6px 0 var(--game-ink); }
+.btn:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--game-ink); }
+.btn:focus-visible { outline: 3px solid var(--game-gold); outline-offset: 3px; }
+.btn[disabled], .btn.is-disabled { opacity: 0.55; cursor: not-allowed; transform: none; box-shadow: 0 2px 0 var(--game-ink); }
+
+.btn-primary { background: var(--btn-bg); color: #fff; }
+.btn-primary:hover { background: var(--btn-bg-hover); transform: translateY(-2px); }
+.btn-secondary { background: var(--brand-secondary); color: #fff; }
+.btn-gold { background: var(--game-gold); color: var(--game-ink); }
+.btn-gold:hover { background: #FFC533; }
+.btn-outline { background: var(--bg-secondary); color: var(--text-primary); border-color: var(--game-ink); }
+.btn-outline:hover { background: var(--brand-primary-soft); color: var(--text-primary); border-color: var(--game-ink); }
+.btn-sm { min-height: 36px; padding: 6px 14px; font-size: 0.88rem; box-shadow: 0 3px 0 var(--game-ink); }
+.btn-sm:hover { box-shadow: 0 4px 0 var(--game-ink); }
+
+.btn-icon {
+  width: 44px; height: 44px;
+  border: 2px solid var(--game-ink);
+  background: var(--bg-secondary);
+  box-shadow: 0 3px 0 var(--game-ink);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.btn-icon:hover { transform: translateY(-1px); box-shadow: 0 4px 0 var(--game-ink); background: var(--brand-primary-soft); }
+.btn-icon:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--game-ink); }
+
+.lang-switch-btn {
+  border: 2px solid var(--game-ink);
+  background: var(--bg-secondary);
+  box-shadow: 0 3px 0 var(--game-ink);
+  min-height: 40px;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.lang-switch-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 0 var(--game-ink); background: var(--brand-primary-soft); }
+.lang-switch-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--game-ink); }
+
+/* ------------------------------------------------------------ Navigation */
+.site-header { border-bottom: 2px solid var(--border-color); }
+.nav-links a { font-family: var(--font-display); font-weight: 700; font-size: 1rem; color: var(--text-secondary); }
+.nav-links a:hover { background: var(--brand-primary-soft); color: var(--brand-primary); }
+.nav-links a.active {
+  background: var(--btn-bg);
+  color: #fff;
+  box-shadow: 0 3px 0 var(--game-ink);
+  border: 2px solid var(--game-ink);
+  padding: 6px 12px;
+}
+.nav-highlight-pill { background: var(--game-gold) !important; color: var(--game-ink) !important; }
+
+.mobile-bottom-nav {
+  background: var(--bg-secondary);
+  border-top: 2px solid var(--game-ink);
+}
+.mobile-bottom-nav a { font-family: var(--font-display); min-width: 56px; min-height: 48px; }
+.mobile-bottom-nav a.active {
+  color: #fff;
+  background: var(--btn-bg);
+  box-shadow: 0 3px 0 var(--game-ink);
+  border: 2px solid var(--game-ink);
+}
+
+/* ------------------------------------------------- Cards, badges, progress */
+.card, .hero-showcase-card, .daily-word-spotlight {
+  border: 2px solid var(--game-ink);
+  box-shadow: 0 5px 0 var(--game-ink);
+  border-radius: var(--radius-lg);
+}
+.card:hover { transform: translateY(-2px); box-shadow: 0 7px 0 var(--game-ink); }
+.card { transition: transform 0.15s ease, box-shadow 0.15s ease; }
+
+.badge { border: 2px solid var(--game-ink); font-family: var(--font-display); font-weight: 700; font-size: 0.8rem; padding: 2px 10px; }
+
+.quiz-progress-track {
+  height: 16px;
+  border: 2px solid var(--game-ink);
+  background: var(--bg-tertiary);
+  position: relative;
+}
+.quiz-progress-fill {
+  background: repeating-linear-gradient(45deg, var(--game-gold) 0 10px, #FFC933 10px 20px);
+  border-right: 2px solid var(--game-ink);
+}
+
+/* ----------------------------------------------- Brand + game stat chips */
+.brand-logo { gap: 10px; }
+.brand-logo-text { display: inline-flex; flex-direction: column; line-height: 1.05; }
+.brand-logo-name { font-size: 1.35rem; font-weight: 800; }
+.brand-logo-zh { font-size: 0.72rem; font-weight: 700; color: var(--brand-primary); letter-spacing: 0.34em; }
+.brand-subtitle { font-family: var(--font-display); }
+
+.game-stats { display: inline-flex; align-items: center; gap: 8px; }
+.game-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  min-height: 38px; padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-secondary);
+  border: 2px solid var(--game-ink);
+  box-shadow: 0 3px 0 var(--game-ink);
+  font-family: var(--font-display); font-weight: 800; font-size: 0.95rem;
+  color: var(--text-primary);
+}
+.game-chip svg { width: 18px; height: 18px; flex-shrink: 0; }
+.game-chip small { font-weight: 700; font-size: 0.72rem; color: var(--text-muted); }
+.game-chip-streak { background: #FFE9D6; }
+.game-chip-xp { background: #FFF3C4; }
+[data-theme="dark"] .game-chip-streak, [data-theme="dark"] .game-chip-xp { color: #2B1B17; }
+
+.hero-title { font-size: clamp(2.2rem, 4.6vw, 3.6rem); line-height: 1.08; }
+.hero-eyebrow { border: 2px solid var(--game-ink); font-family: var(--font-display); }
+
+@media (max-width: 1100px) { .game-chip small { display: none; } }
+@media (max-width: 700px) { .game-stats { display: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .btn, .btn-icon, .lang-switch-btn, .card { transition: none; }
+  .btn:hover, .btn:active, .card:hover { transform: none; }
+}
+
+/* Keep the navbar from overflowing when the stat chips are shown */
+.nav-links { gap: 4px; }
+.nav-links a { padding: 6px 10px; font-size: 0.95rem; white-space: nowrap; }
+.nav-links a.active { padding: 4px 8px; }
+.game-chip small { display: none; }
+@media (min-width: 1500px) { .game-chip small { display: inline; } .nav-links a { padding: 6px 12px; } }
+@media (max-width: 1280px) { .game-stats { display: none; } }
+
+/* Game outline for the remaining card-like surfaces */
+.vocab-card, .spec-card, .match-card, .kpi-card, .interview-scenario-card, .distinction-card,
+.pm-phrase-card, .grammar-detail-card, .pillar-card, .path-step-card, .flashcard-face, .spec-card-face,
+.filter-panel, .vocab-filter-panel {
+  border: 2px solid var(--game-ink);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 0 var(--game-ink);
+}
+.vocab-card, .spec-card, .pillar-card, .path-step-card { transition: transform 0.15s ease, box-shadow 0.15s ease; }
+.vocab-card:hover, .spec-card:hover, .pillar-card:hover, .path-step-card:hover { transform: translateY(-3px); box-shadow: 0 7px 0 var(--game-ink); }
+.filter-select, input[type="search"], input[type="text"], select {
+  border: 2px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  min-height: 44px;
+}
+.filter-select:focus, input:focus-visible, select:focus-visible { outline: 3px solid var(--game-gold); outline-offset: 1px; border-color: var(--game-ink); }
+.game-stats { display: none; }
+@media (min-width: 1500px) { .game-stats { display: inline-flex; } }
+@media (prefers-reduced-motion: reduce) {
+  .vocab-card:hover, .spec-card:hover, .pillar-card:hover, .path-step-card:hover { transform: none; }
+}

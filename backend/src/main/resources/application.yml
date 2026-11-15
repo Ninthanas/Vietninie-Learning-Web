@@ -1,0 +1,36 @@
+server:
+  port: ${PORT:8080}
+
+spring:
+  application:
+    name: vietninie-backend
+  profiles:
+    # Default = MySQL (127.0.0.1:3306, root, no password). In-memory H2: SPRING_PROFILES_ACTIVE=h2
+    default: mysql
+  jpa:
+    open-in-view: false
+  jackson:
+    # FE speaks snake_case (access_token, display_name, quiz_score, ...)
+    property-naming-strategy: SNAKE_CASE
+    default-property-inclusion: non_null
+  servlet:
+    multipart:
+      max-file-size: 5MB
+
+app:
+  jwt:
+    # >= 32 chars. Override in production: JWT_SECRET=...
+    secret: ${JWT_SECRET:vietninie-dev-secret-change-me-please-0123456789}
+    expiration-hours: ${JWT_EXPIRATION_HOURS:72}
+  cors:
+    allowed-origins: ${CORS_ORIGINS:http://localhost:5173,http://127.0.0.1:5173,http://localhost:3000}
+  seed:
+    enabled: ${SEED_ENABLED:true}
+  admin:
+    username: ${ADMIN_USERNAME:admin}
+    password: ${ADMIN_PASSWORD:admin123}
+    display-name: Administrator
+
+logging:
+  level:
+    com.vietninie: INFO

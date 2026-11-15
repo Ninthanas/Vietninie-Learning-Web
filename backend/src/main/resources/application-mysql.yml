@@ -1,0 +1,9 @@
+# MySQL profile (default). Local user "vietninie" - create it with the SQL in README. Override with DB_USERNAME / DB_PASSWORD.
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:mysql://127.0.0.1:3306/vietninie?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&characterEncoding=UTF-8}
+    username: ${DB_USERNAME:vietninie}
+    password: ${DB_PASSWORD:vietninie123}
+  jpa:
+    hibernate:
+      ddl-auto: ${DDL_AUTO:update}
