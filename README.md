@@ -44,8 +44,20 @@ python run.py
 ```
 Chi tiết: [AI-service/README.md](AI-service/README.md).
 
+## Đưa web lên GitHub Pages (có chat Ni Ni)
+
+Frontend được build và đăng tự động bằng `.github/workflows/pages.yml` mỗi khi push thay đổi trong `frontend/`.
+Trên trang Pages, dữ liệu học và tiến độ lưu ngay trong trình duyệt (không cần máy chủ). Chat Ni Ni đi qua proxy ở `ai-proxy/` (Cloudflare Worker) để **không lộ khóa Gemini**.
+
+1. Repo → Settings → Pages → Source: **GitHub Actions**.
+2. Triển khai proxy theo hướng dẫn trong [ai-proxy/README.md](ai-proxy/README.md), rồi tạo biến repo `AI_PROXY_URL` (Settings → Secrets and variables → Actions → Variables).
+3. Push lên `main`. Web sẽ có tại `https://<tên-tài-khoản>.github.io/<tên-repo>/`.
+
+Nếu chưa đặt `AI_PROXY_URL`, web vẫn chạy bình thường và nút chat sẽ tự ẩn.
+
 ## Bảo mật khi triển khai thật
 - **Bắt buộc đổi** `ADMIN_PASSWORD`, `JWT_SECRET`, `DB_PASSWORD` (giá trị mặc định chỉ dành cho máy dev).
+- Khi triển khai thật, chạy backend với profile `prod`: `SPRING_PROFILES_ACTIVE=mysql,prod`. Ở chế độ này backend **từ chối khởi động** nếu ba giá trị trên vẫn là mặc định. Ở chế độ dev, backend chỉ ghi cảnh báo vào log.
 - Không commit file `.env`. Khóa Gemini chỉ đặt ở AI-service, không đưa vào frontend.
 - Mọi biến `VITE_*` bị nhúng vào JavaScript gửi cho trình duyệt. Không đặt token bí mật ở đó (đặc biệt `VITE_TURSO_TOKEN`: chỉ dùng token chỉ-đọc hoặc bỏ trống).
 - Đặt `CORS_ORIGINS` đúng tên miền của bạn.

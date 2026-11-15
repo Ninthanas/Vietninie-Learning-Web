@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '../../hooks/useLanguage';
 import { LogoMark } from '../mascot/Logo';
-import { AI_BASE_URL, sendChatMessage } from '../../services/chatApi';
+import { AI_BASE_URL, MAX_MESSAGE_CHARS, sendChatMessage } from '../../services/chatApi';
 
 /** Floating AI chat button + popup panel. Conversation lives in component state (server is stateless). */
 export default function ChatWidget() {
@@ -31,7 +31,7 @@ export default function ChatWidget() {
     } catch (e) {
       const msg =
         e.message === 'NETWORK'
-          ? pick('Không kết nối được AI service (localhost:8000).', '无法连接 AI 服务 (localhost:8000)。')
+          ? pick('Không kết nối được Ni Ni, kiểm tra mạng rồi thử lại nhé.', '无法连接 Ni Ni，请检查网络后重试。')
           : e.message;
       setMessages((prev) => [...prev, { role: 'assistant', content: msg, error: true }]);
     } finally {
@@ -77,7 +77,7 @@ export default function ChatWidget() {
             <textarea
               rows={1}
               value={input}
-              maxLength={2000}
+              maxLength={MAX_MESSAGE_CHARS}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={onKeyDown}
               placeholder={pick('Nhập câu hỏi…', '输入问题…')}
